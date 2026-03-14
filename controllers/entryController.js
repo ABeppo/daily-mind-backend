@@ -100,5 +100,3 @@ module.exports = {
   updateEntry,
   deleteEntry
 };
-
-module.exports = { createEntry, getEntriesByUser };
