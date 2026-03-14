@@ -1,13 +1,18 @@
 var express = require('express');
 var router = express.Router();
 const User = require("../models/user")
-const { signupUser } = require("../controllers/userController");
+const { signupUser, 
+  getProfile, 
+  updateProfile, 
+  deleteUser, 
+  signinUser} = require("../controllers/userController");
+const auth = require("../modules/auth");
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
-
+// GET users listing.
+// router.get('/', function(req, res, next) {
+//   res.send('respond with a resource');
+// });
+/* Test DB
 router.get("/test-db", async (req, res) => {
   try {
     const testUser = new User({
@@ -29,10 +34,15 @@ router.get("/test-db", async (req, res) => {
       error: error.message
     });
   }
-});
+}); */
 
-module.exports = router;
-
+// Routes publiques
 router.post("/signup", signupUser);
+router.post("/signin", signinUser);
+
+// Routes sécurisées
+router.get("/profile", auth, getProfile);
+router.put("/profile", auth, updateProfile);
+router.delete("/", auth, deleteUser);
 
 module.exports = router;

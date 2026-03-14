@@ -37,6 +37,13 @@ const UserSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+// Méthode toJSON pour exclure le mot de passe à chaque réponse JSON
+UserSchema.methods.toJSON = function () {
+  const obj = this.toObject();
+  delete obj.password;
+  return obj;
+};
+
 const User = mongoose.model('User', UserSchema);
 
 module.exports = User;
