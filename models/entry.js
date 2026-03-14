@@ -5,13 +5,15 @@ const EntrySchema = new mongoose.Schema(
     userId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-      required: true
+      required: true,
+      index: true
     },
 
     title: {
       type: String,
       trim: true,
-      maxlength: 100
+      maxlength: 100,
+      default: ""
     },
 
     text: {
@@ -23,7 +25,8 @@ const EntrySchema = new mongoose.Schema(
     mood: {
       type: String,
       enum: ["happy", "neutral", "sad", "angry", "tired"],
-      required: true
+      required: true,
+      default: "neutral"
     }
   },
   { timestamps: true }
